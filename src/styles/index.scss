@@ -1,7 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+$primary: #532dad;
+$light: #f5f5f7;
 
 * {
-  font-family: Inter;
+  font-family: "Inter", sans-serif;
+  letter-spacing: -0.02em;
 }
 
 *,
@@ -11,54 +15,138 @@
 }
 
 .items-wrapper {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   max-height: 400px;
-  gap: 18px;
+  gap: 32px;
   overflow-y: scroll;
-  padding: 18px;
+  padding: 24px;
+  border-radius: 12px;
 
   .item {
     display: flex;
     flex-direction: column;
     width: 300px;
     height: 100%;
-    padding: 16px;
     border-radius: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+    background-color: rgba($primary, 0.025);
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0px 0px 40px 6px rgba($primary, 0.1);
+    }
 
     .p-img-wrapper {
-      background-color: rgba(0, 0, 0, 0.05);
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      position: relative;
       width: 100%;
       height: 180px;
-      border-radius: 5px;
+      border-radius: 6px;
       display: flex;
       justify-content: center;
+      background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.3),
+        rgba(0, 0, 0, 0.1)
+      );
+      background-color: rgba(0, 0, 0, 0.1);
       overflow: hidden;
-      margin-bottom: 6px;
 
       img {
         width: 100%;
-        object-fit: cover;
+        object-fit: contain;
+        position: absolute;
+        transition: opacity 0.5s ease;
       }
 
-      img.active {
-        border: 2px solid blue;
+      .image-navigation {
+        position: absolute;
+        bottom: 10px;
+        right: 12px;
+
+        button {
+          border: none;
+          border-radius: 25px;
+          width: 30px;
+          height: 30px;
+          margin: 0 6px;
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+
+          img {
+            width: 12px;
+          }
+        }
       }
     }
 
-    .p-name {
-      font-size: 18px;
+    .p-content {
+      padding: 12px 18px;
     }
 
-    .p-qty {
+    .p-id {
+      color: rgba($primary, 0.75);
+      font-weight: 600;
       font-size: 14px;
     }
 
-    .p-price {
+    .p-name {
       font-size: 20px;
+      font-weight: 500;
+    }
+
+    .p-qty {
+      font-size: 12px;
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    .p-price {
+      font-size: 22px;
+      color: $primary;
+      font-weight: 700;
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+    max-height: 95vh;
+    gap: 24px;
+    padding: 12px;
+    margin: 12px;
+    border-radius: 10px;
+
+    .item {
+      width: 100%;
+      height: 100%;
+      padding: 12px;
+      border-radius: 6px;
+
+      .p-img-wrapper {
+        width: 100%;
+        height: 120px;
+        border-radius: 3px;
+        margin-bottom: 4px;
+      }
+
+      .p-id {
+        font-size: 14px;
+      }
+
+      .p-name {
+        font-size: 16px;
+      }
+
+      .p-qty {
+        font-size: 12px;
+      }
+
+      .p-price {
+        font-size: 18px;
+      }
     }
   }
 }
