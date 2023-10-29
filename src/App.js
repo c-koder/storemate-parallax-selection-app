@@ -4,19 +4,16 @@ import Item from "./components/item.component";
 
 const App = () => {
   const [data, setData] = useState([]);
-
   const [loading, setLoading] = useState(true);
-
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
-
   const containerRef = useRef(null);
 
   const imgUrls = useMemo(
     () => [
       "https://source.unsplash.com/random/300x240/?laptop",
-      "https://source.unsplash.com/random/300x240/?electronic",
       "https://source.unsplash.com/random/300x240/?smartphone",
+      "https://source.unsplash.com/random/300x240/?gaming",
     ],
     []
   );
@@ -36,8 +33,8 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    setLoading(true);
-    const loadImages = async () => {
+    (async () => {
+      setLoading(true);
       for (const imgUrl of imgUrls) {
         const image = new Image();
         image.onload = () => {
@@ -46,8 +43,7 @@ const App = () => {
         image.src = imgUrl;
         await new Promise((resolve) => (image.onload = resolve));
       }
-    };
-    loadImages();
+    })();
   }, []);
 
   const handleScroll = () => {
